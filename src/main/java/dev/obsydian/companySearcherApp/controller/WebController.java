@@ -20,7 +20,11 @@ public class WebController {
 
 	@PostMapping("/")
 		public String checkCompany(@ModelAttribute("nip") String nip){
-		return "redirect:/nip/" + nip;
+		if (nip.length() != 10){
+			return "redirect:/?error";
+		} else {
+			return "redirect:/nip/" + nip;
+		}
 	}
 
 	@GetMapping("/nip/{nip}")

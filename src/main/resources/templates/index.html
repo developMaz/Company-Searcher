@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div data-th-if="${param.error}" class="alert alert-warning" role="alert">
-                <p>Nastąpiły błędy w komunikacji, prosimy spróbować jeszcze raz.</p>
+                <p>Nastąpiły błędy w komunikacji lub podano nieprawdiłową liczbę znaków, prosimy spróbować jeszcze raz.</p>
             </div>
         </form>
 
@@ -45,7 +45,7 @@
             <th>Miejscowość</th>
             <th>Kod pocztowy</th>
             </thead>
-            <tr data-th-each="tmp : ${company}">
+            <tr data-th-each="tmp : ${company}" align="center">
                 <td data-th-text="${nip}"></td>
                 <td data-th-text="${tmp.nazwa}"></td>
                 <td data-th-text="${tmp.regon}"></td>
