@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Company Searcher - Sprawdź dane firmy w bazie GUS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+
+
+<div class="container-fluid" >
+
+    <div class="row d-flex justify-content-center" style="margin: 15px">
+        <div class="col-12 d-flex justify-content-center"><h3><font style="bold">Company Searcher</font></h3></div>
+        <div class="col-12 d-flex justify-content-center"><h4>Sprawdź dane firmy w bazie GUS</h4></div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <form data-th-action="@{/}" data-th-object="${nip}" method="post" class="w-50 p-3">
+            <div class="input-group mb-3" width="50">
+                <input type="number" name="nip" id="nip" class="form-control" placeholder="Podaj numer NIP firmy, którą chcesz sprawdzić"
+                       aria-label="Podaj numer NIP firmy, którą chcesz sprawdziće" aria-describedby="button-addon2"
+                       size="10" aria-setsize="10" required="required">
+                <div class="input-group-append">
+                    <input type="submit" value="Sprawdź" class="btn btn-outline-secondary" />
+                </div>
+            </div>
+            <div data-th-if="${param.error}" class="alert alert-warning" role="alert">
+                <p>Nastąpiły błędy w komunikacji, prosimy spróbować jeszcze raz.</p>
+            </div>
+        </form>
+
+    </div>
+
+    <div data-th-if="${company != null}"  class="row jumbotron jumbotron-fluid row mh-100" align="center">
+        <table class="table table-bordered table stripped table-responsive" align="center">
+            <thead class="thead-dark" border="0">
+            <th>NIP</th>
+            <th>Nazwa firmy</th>
+            <th>Regon</th>
+            <th>Regon 2</th>
+            <th>Województwo</th>
+            <th>Powiat</th>
+            <th>Gmina</th>
+            <th>Miejscowość</th>
+            <th>Kod pocztowy</th>
+            </thead>
+            <tr data-th-each="tmp : ${company}">
+                <td data-th-text="${nip}"></td>
+                <td data-th-text="${tmp.nazwa}"></td>
+                <td data-th-text="${tmp.regon}"></td>
+                <td data-th-text="${tmp.regonLink}"></td>
+                <td data-th-text="${tmp.wojewodztwo}"></td>
+                <td data-th-text="${tmp.powiat}"></td>
+                <td data-th-text="${tmp.gmina}"></td>
+                <td data-th-text="${tmp.miejscowosc}"></td>
+                <td data-th-text="${tmp.kodPocztowy}"></td>
+            </tr>
+        </table>
+    </div>
+    <div data-th-if="${company == null}" class="container-fluid">
+        <div class="jumbotron jumbotron-fluid row">
+            <div class="container d-flex justify-content-center">
+                <h1 class="display-4">Co możesz sprawdzić?</h1>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-center">Po wpisaniu numeru NIP w pole wyszukiwania będziesz mógł spprawdzić dane firmy według rejestru GUS.</div>
+                <div class="col-12 d-flex justify-content-center">Pamiętaj, aby wpisać dokładnie 10 cyfr, bez dodatkowych znaków.</div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</div>
+</body>
+</html>
